@@ -13,9 +13,9 @@ Class2=CHMIDlg
 Class3=CAboutDlg
 
 ResourceCount=5
-Resource1=IDD_ABOUTBOX
+Resource1=IDD_DIALOG_RUN
 Resource2=IDR_MAINFRAME
-Resource3=IDD_DIALOG_RUN
+Resource3=IDD_ABOUTBOX
 Class4=CHMIRunDlg
 Resource4=IDD_HMI_DIALOG
 Class5=CHMISettingDlg
