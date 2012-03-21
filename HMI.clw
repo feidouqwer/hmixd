@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CHMIDlg
+LastClass=CHMIRunDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "HMI.h"
@@ -13,11 +13,11 @@ Class2=CHMIDlg
 Class3=CAboutDlg
 
 ResourceCount=5
-Resource1=IDD_DIALOG_RUN
+Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
-Resource3=IDD_HMI_DIALOG
+Resource3=IDD_DIALOG_RUN
 Class4=CHMIRunDlg
-Resource4=IDD_ABOUTBOX
+Resource4=IDD_HMI_DIALOG
 Class5=CHMISettingDlg
 Resource5=IDD_DIALOG_SETTING
 
@@ -34,7 +34,7 @@ ImplementationFile=HMIDlg.cpp
 Filter=D
 BaseClass=CDialog
 VirtualFilter=dWC
-LastObject=IDC_TAB
+LastObject=CHMIDlg
 
 [CLS:CAboutDlg]
 Type=0
@@ -56,9 +56,9 @@ Control5=IDC_STATIC,static,1342308352
 Type=1
 Class=CHMIDlg
 ControlCount=3
-Control1=IDOK,button,1342242817
-Control2=IDCANCEL,button,1342242816
-Control3=IDC_TAB,SysTabControl32,1342178304
+Control1=IDC_TAB,SysTabControl32,1342178304
+Control2=IDC_STATIC,static,1342308352
+Control3=IDC_STATIC_TIP,static,1342308352
 
 [DLG:IDD_DIALOG_RUN]
 Type=1
@@ -74,24 +74,29 @@ HeaderFile=HMIRunDlg.h
 ImplementationFile=HMIRunDlg.cpp
 BaseClass=CDialog
 Filter=D
+VirtualFilter=dWC
+LastObject=CHMIRunDlg
 
 [DLG:IDD_DIALOG_SETTING]
 Type=1
 Class=CHMISettingDlg
-ControlCount=8
+ControlCount=9
 Control1=IDC_STATIC,static,1342308352
-Control2=IDC_IPADDRESS1,SysIPAddress32,1342242816
+Control2=IDC_IPADDRESS_CABIN_IP,SysIPAddress32,1342242816
 Control3=IDC_STATIC,button,1342177287
 Control4=IDC_STATIC,button,1342177287
 Control5=IDC_STATIC,static,1342308352
-Control6=IDC_COMBO1,combobox,1344340226
+Control6=IDC_COMBO_TOWER,combobox,1344340227
 Control7=IDC_STATIC,static,1342308352
-Control8=IDC_IPADDRESS2,SysIPAddress32,1342242816
+Control8=IDC_IPADDRESS_TOWER_IP,SysIPAddress32,1342242816
+Control9=IDC_BUTTON_SET,button,1342242816
 
 [CLS:CHMISettingDlg]
 Type=0
 HeaderFile=hmisettingdlg.h
 ImplementationFile=hmisettingdlg.cpp
 BaseClass=CDialog
-LastObject=IDC_COMBO1
+LastObject=IDC_BUTTON_SET
+Filter=D
+VirtualFilter=dWC
 

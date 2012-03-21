@@ -43,6 +43,7 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg void OnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnCancelMode();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 

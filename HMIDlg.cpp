@@ -63,7 +63,6 @@ CHMIDlg::CHMIDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CHMIDlg::IDD, pParent)
 {
 	//{{AFX_DATA_INIT(CHMIDlg)
-		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
@@ -83,6 +82,7 @@ BEGIN_MESSAGE_MAP(CHMIDlg, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB, OnSelchangeTab)
+	ON_WM_CANCELMODE()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -118,17 +118,17 @@ BOOL CHMIDlg::OnInitDialog()
 	m_settingDlg.Create(IDD_DIALOG_SETTING, GetDlgItem(IDC_TAB));
 
 	CRect rs;
-	m_tab.GetWindowRect(&rs);
+	m_tab.GetClientRect(&rs);
 	TRACE("top = %d\n", rs.top);
-	rs.top += 1;
-	rs.bottom -= 60;
+	rs.top += 20;
+	rs.bottom -= 1;
 	rs.left += 1;
 	rs.right -= 2;
 	m_runDlg.MoveWindow(&rs);
 	m_settingDlg.MoveWindow(&rs);
 
-	m_runDlg.ShowWindow(true);
-	m_settingDlg.ShowWindow(false);
+	m_runDlg.ShowWindow(SW_SHOW);
+	m_settingDlg.ShowWindow(SW_HIDE);
 
 	m_tab.SetCurSel(0);
 	// Set the icon for this dialog.  The framework does this automatically
@@ -137,7 +137,7 @@ BOOL CHMIDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	
 	// TODO: Add extra initialization here
-	
+	SetDlgItemText(IDC_STATIC_TIP, __T("…Ë÷√≥…π¶"));
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -198,12 +198,12 @@ void CHMIDlg::OnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult)
 	switch(nCurSel)
 	{
 	case 0:
-		m_runDlg.ShowWindow(true);
-		m_settingDlg.ShowWindow(false);
+		m_runDlg.ShowWindow(SW_SHOW);
+		m_settingDlg.ShowWindow(SW_HIDE);
 		break;
 	case 1:
-		m_runDlg.ShowWindow(false);
-		m_settingDlg.ShowWindow(true);
+		m_runDlg.ShowWindow(SW_HIDE);
+		m_settingDlg.ShowWindow(SW_SHOW);
 		break;
 	default:
 		break;
@@ -211,3 +211,11 @@ void CHMIDlg::OnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult)
 	*pResult = 0;
 }
 
+
+void CHMIDlg::OnCancelMode() 
+{
+	CDialog::OnCancelMode();
+	
+	// TODO: Add your message handler code here
+	
+}

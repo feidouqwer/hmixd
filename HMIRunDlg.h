@@ -7,6 +7,7 @@
 // HMIRunDlg.h : header file
 //
 
+#include "CfgFile.h"
 /////////////////////////////////////////////////////////////////////////////
 // CHMIRunDlg dialog
 
@@ -35,9 +36,12 @@ protected:
 
 	// Generated message map functions
 	//{{AFX_MSG(CHMIRunDlg)
-		// NOTE: the ClassWizard will add member functions here
+	afx_msg void OnButtonRun();
+	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+private:
+	CCfgFile m_cfgFile;
 };
 
 //{{AFX_INSERT_LOCATION}}

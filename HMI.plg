@@ -6,6 +6,50 @@
 --------------------Configuration: HMI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"Debug/HMI.res" /d "_DEBUG" "D:\job\vc\hmixd\HMI.rc"" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1D.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Debug/" /Fp"Debug/HMI.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\job\vc\hmixd\CfgFile.cpp"
+"D:\job\vc\hmixd\HMI.cpp"
+"D:\job\vc\hmixd\HMIDlg.cpp"
+"D:\job\vc\hmixd\HMIRunDlg.cpp"
+"D:\job\vc\hmixd\HMISettingDlg.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1D.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1E.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Debug/" /Fp"Debug/HMI.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\job\vc\hmixd\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1E.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1F.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/HMI.pdb" /debug /machine:I386 /out:"Debug/HMI.exe" /pdbtype:sept 
+.\Debug\CfgFile.obj
+.\Debug\HMI.obj
+.\Debug\HMIDlg.obj
+.\Debug\HMIRunDlg.obj
+.\Debug\HMISettingDlg.obj
+.\Debug\StdAfx.obj
+.\Debug\HMI.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1F.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+CfgFile.cpp
+HMI.cpp
+HMIDlg.cpp
+HMIRunDlg.cpp
+HMISettingDlg.cpp
+Generating Code...
+Linking...
+Creating command line "bscmake.exe /nologo /o"Debug/HMI.bsc"  .\Debug\StdAfx.sbr .\Debug\CfgFile.sbr .\Debug\HMI.sbr .\Debug\HMIDlg.sbr .\Debug\HMIRunDlg.sbr .\Debug\HMISettingDlg.sbr"
+Creating browse info file...
+<h3>Output Window</h3>
 
 
 
