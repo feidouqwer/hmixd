@@ -114,6 +114,10 @@ SOURCE=.\HMISettingDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\ProFile.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
@@ -140,6 +144,10 @@ SOURCE=.\HMIRunDlg.h
 # Begin Source File
 
 SOURCE=.\HMISettingDlg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ProFile.h
 # End Source File
 # Begin Source File
 

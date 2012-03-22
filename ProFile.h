@@ -14,7 +14,6 @@ class CProFile
 public:
 	BOOL SaveProFile(LPCSTR lpcstrPath);
 	BOOL MakeBakFile(LPCSTR lpstrPath);
-	BOOL LoadProFile(LPCSTR lpstrPath);
 	CProFile(int nTjNum);
 	virtual ~CProFile();
 

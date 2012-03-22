@@ -6,13 +6,13 @@
 --------------------Configuration: HMI - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP21C.tmp" with contents
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP23D.tmp" with contents
 [
 /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Debug/" /Fp"Debug/HMI.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
 "D:\job\vc\hmixd\ProFile.cpp"
 ]
-Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP21C.tmp" 
-Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP21D.tmp" with contents
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP23D.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP23E.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:yes /pdb:"Debug/HMI.pdb" /debug /machine:I386 /out:"Debug/HMI.exe" /pdbtype:sept 
 .\Debug\CfgFile.obj
@@ -20,11 +20,11 @@ Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP21D.tmp" with con
 .\Debug\HMIDlg.obj
 .\Debug\HMIRunDlg.obj
 .\Debug\HMISettingDlg.obj
+.\Debug\ProFile.obj
 .\Debug\StdAfx.obj
 .\Debug\HMI.res
-.\Debug\ProFile.obj
 ]
-Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP21D.tmp"
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP23E.tmp"
 <h3>Output Window</h3>
 Compiling...
 ProFile.cpp

@@ -19,7 +19,10 @@ public:
 	virtual ~CCfgFile();
 
 private:
-	int number;
+	int nTjNum;
+	DWORD m_jcip;
+	DWORD m_tjip[1000];
+	CString batFileName;
 };
 
 #endif // !defined(AFX_CFGFILE_H__3D013421_0823_47BF_9215_9F4ACBBB3AE2__INCLUDED_)

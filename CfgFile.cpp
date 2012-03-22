@@ -21,7 +21,7 @@ static char THIS_FILE[]=__FILE__;
 
 CCfgFile::CCfgFile()
 {
-	number = DEFAULT_NUMBER;
+	nTjNum = DEFAULT_NUMBER;
 }
 
 CCfgFile::~CCfgFile()
@@ -31,51 +31,71 @@ CCfgFile::~CCfgFile()
 
 bool CCfgFile::LoadCfgFile()
 {
-	CFile file;
-	CString strLine;
-	int nIndex;
-
-	if(!file.Open("HMICfg.txt", CFile::modeRead))
+	CFile cfgFile;
+	
+	if(!cfgFile.Open(__T("HMICfg.txt"), CFile::modeRead))
 	{
+		AfxMessageBox(__T("打开配置属性文件失败"), MB_OK | MB_ICONERROR);
 		return false;
 	}
-	CArchive arch(&file, CArchive::load);
+	CArchive arch(&cfgFile, CArchive::load);
+	
+	CString strLine;
+	CString valueStr;
+	int nIndex = 0;
+	int ipAddr[4];
 	while(arch.ReadString(strLine))
 	{
-		TRACE("%s\n", strLine);
 		strLine.TrimLeft();
-		if(strLine.Find("#", 0) == 0)
-		{
+		if(strLine.Left(1) == "#")
 			continue;
-		}
-		nIndex = strLine.Find("=", 0);
-		if(nIndex <= 0)
-		{
+
+		int equalPos = strLine.Find("=");
+		if(equalPos < 0)
 			continue;
-		}
-		CString leftStr = strLine.Left(nIndex);
-		CString rightStr = strLine.Right(strLine.GetLength() - nIndex - 1);
-		leftStr.TrimLeft();
-		leftStr.TrimRight();
-		rightStr.TrimLeft();
-		rightStr.TrimRight();
-		TRACE("nIndex = %d", nIndex);
-		TRACE("LeftStr = %s\r\n", leftStr);
-		TRACE("RightStr = %s\r\n", rightStr);
-		if(leftStr == "number")
+		
+		valueStr = strLine.Mid(equalPos + 1, strLine.GetLength() - equalPos - 1);
+		valueStr.TrimLeft();
+		valueStr.TrimRight();
+		if(valueStr.IsEmpty())
+			continue;
+		
+		int nTjPos;
+		if((nTjPos = strLine.Find(__T("TJIP"))) != -1)	// 查找塔基IP
 		{
-			number = atoi(rightStr);
-			if(number < 0)
+			CString numStr = strLine.Mid(nTjPos + 4, equalPos - nTjPos - 4);
+			if(numStr.IsEmpty())
+				continue;
+			int nTjNum = atoi(numStr);
+			if(sscanf(valueStr, "%d.%d.%d.%d", &ipAddr[0], &ipAddr[1], &ipAddr[2], &ipAddr[3]) != 4)
 			{
-				number = 0;
+				continue;
 			}
-			else if(number > 1000)
+			if(nTjNum < 1000)
 			{
-				number = 1000;
+				m_tjip[nTjNum] = (ipAddr[0] << 24) | (ipAddr[1] << 16) | (ipAddr[1] << 8) | (ipAddr[1] << 0);
 			}
+			TRACE("TJNUM: %d\r\n", nTjNum);
+			TRACE("IP: %d.%d.%d.%d\r\n", ipAddr[0], ipAddr[1], ipAddr[2], ipAddr[3]);
+		}
+		else if(strLine.Find(__T("JCIP")) != -1)	// 查找机舱IP
+		{
+			if(sscanf(valueStr, "%d.%d.%d.%d", &ipAddr[0], &ipAddr[1], &ipAddr[2], &ipAddr[3]) != 4)
+			{
+				continue;
+			}
+			m_jcip = (ipAddr[0] << 24) | (ipAddr[1] << 16) | (ipAddr[1] << 8) | (ipAddr[1] << 0);
+		}
+		else if(strLine.Find(__T("number")) != -1)
+		{
+			nTjNum = atoi(valueStr);
+		}
+		else if(strLine.Find(__T("batFileName")) != -1)
+		{
+			batFileName = valueStr;
 		}
 	}
-	return true;
+	return 0;
 }
 
 bool CCfgFile::SaveCfgFile()
@@ -108,5 +128,5 @@ bool CCfgFile::SaveCfgFile()
 
 int CCfgFile::getNumber()
 {
-	return number;
+	return nTjNum;
 }

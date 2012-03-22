@@ -27,66 +27,6 @@ CProFile::~CProFile()
 
 }
 
-BOOL CProFile::LoadProFile(LPCSTR lpstrPath)
-{
-	CFile proFile;
-	
-	if(!proFile.Open(lpstrPath, CFile::modeRead))
-	{
-		AfxMessageBox(__T("打开配置属性文件失败"), MB_OK | MB_ICONERROR);
-		return false;
-	}
-	CArchive arch(&proFile, CArchive::load);
-	
-	CString strLine;
-	CString ipStr;
-	int nIndex = 0;
-	int ipAddr[4];
-	while(arch.ReadString(strLine))
-	{
-		strLine.TrimLeft();
-		if(strLine.Left(2) == "#!")
-		{
-			int equalPos = strLine.Find("=");
-			if(equalPos < 0)
-				continue;
-			int nTjPos;
-			if((nTjPos = strLine.Find(__T("TJIP"))) != -1)
-			{
-				CString numStr = strLine.Mid(nTjPos + 4, equalPos - nTjPos - 4);
-				if(numStr.IsEmpty())
-					continue;
-				int nTjNum = atoi(numStr);
-				ipStr = strLine.Mid(equalPos + 1, strLine.GetLength() - equalPos - 1);
-				ipStr.TrimLeft();
-				ipStr.TrimRight();
-				if(sscanf(ipStr, "%d.%d.%d.%d", &ipAddr[0], &ipAddr[1], &ipAddr[2], &ipAddr[3]) != 4)
-				{
-					continue;
-				}
-				if(nTjNum < 1000)
-				{
-					m_tjip[nTjNum] = (ipAddr[0] << 24) | (ipAddr[1] << 16) | (ipAddr[1] << 8) | (ipAddr[1] << 0);
-				}
-				TRACE("TJNUM: %d\r\n", nTjNum);
-				TRACE("IP: %d.%d.%d.%d\r\n", ipAddr[0], ipAddr[1], ipAddr[2], ipAddr[3]);
-			}
-			else if(strLine.Find(__T("JCIP")) != -1)
-			{
-				ipStr = strLine.Mid(equalPos + 1, strLine.GetLength() - equalPos - 1);
-				ipStr.TrimLeft();
-				ipStr.TrimRight();
-				if(sscanf(ipStr, "%d.%d.%d.%d", &ipAddr[0], &ipAddr[1], &ipAddr[2], &ipAddr[3]) != 4)
-				{
-					continue;
-				}
-				m_jcip = (ipAddr[0] << 24) | (ipAddr[1] << 16) | (ipAddr[1] << 8) | (ipAddr[1] << 0);
-			}
-		}
-	}
-	return 0;
-}
-
 BOOL CProFile::SaveProFile(LPCSTR lpcstrPath)
 {
 	CFile file;
