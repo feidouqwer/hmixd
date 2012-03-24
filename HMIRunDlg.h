@@ -40,8 +40,6 @@ protected:
 	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
-private:
-	CCfgFile m_cfgFile;
 };
 
 //{{AFX_INSERT_LOCATION}}

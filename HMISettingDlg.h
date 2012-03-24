@@ -6,6 +6,7 @@
 #endif // _MSC_VER > 1000
 // CHMISettingDlg.h : header file
 //
+#include "CfgFile.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CHMISettingDlg dialog
@@ -37,6 +38,7 @@ protected:
 	//{{AFX_MSG(CHMISettingDlg)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnButtonSet();
+	afx_msg void OnSelchangeComboTower();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

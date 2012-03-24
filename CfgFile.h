@@ -9,20 +9,28 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#define MAX_TOWER_NUM 1000
+
 class CCfgFile  
 {
 public:
-	int getNumber();
+	void SetTowerIP(int nIndex, DWORD dwTowerIP);
+	void SetCabinIP(DWORD dwCabinIP);
+	DWORD GetTowerIP(int nIndex);
+	DWORD GetCabinIP();
+	bool SaveDefaultCfgFile();
+	CString GetBatFileName();
+	int GetTowerNumber();
 	bool SaveCfgFile();
 	bool LoadCfgFile();
 	CCfgFile();
 	virtual ~CCfgFile();
 
 private:
-	int nTjNum;
-	DWORD m_jcip;
-	DWORD m_tjip[1000];
-	CString batFileName;
+	int m_nTowerNum;
+	DWORD m_CabinIp;
+	DWORD m_TowerIP[MAX_TOWER_NUM];
+	CString m_batFileName;
 };
 
 #endif // !defined(AFX_CFGFILE_H__3D013421_0823_47BF_9215_9F4ACBBB3AE2__INCLUDED_)

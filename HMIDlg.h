@@ -8,6 +8,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#include "CfgFile.h"
 #include "HMIRunDlg.h"
 #include "HMISettingDlg.h"
 
@@ -18,6 +19,7 @@ class CHMIDlg : public CDialog
 {
 // Construction
 public:
+	void SetStatusString(CString strText);
 	CHMIDlg(CWnd* pParent = NULL);	// standard constructor
 
 // Dialog Data
@@ -51,6 +53,8 @@ private:
 	CHMIRunDlg m_runDlg;
 	CHMISettingDlg m_settingDlg;
 };
+
+extern CCfgFile gCfgFile;
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

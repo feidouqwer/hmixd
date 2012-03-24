@@ -19,7 +19,7 @@ public:
 
 private:
 	int nTjNum;
-	DWORD m_jcip;
+	DWORD m_CabinIp;
 	DWORD m_tjip[1000];
 };
 

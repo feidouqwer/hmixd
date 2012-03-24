@@ -56,6 +56,7 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
+CCfgFile gCfgFile;
 /////////////////////////////////////////////////////////////////////////////
 // CHMIDlg dialog
 
@@ -111,6 +112,8 @@ BOOL CHMIDlg::OnInitDialog()
 		}
 	}
 	
+	gCfgFile.LoadCfgFile();
+
 	m_tab.InsertItem(0, __T("启动"));
 	m_tab.InsertItem(1, __T("设置"));
 
@@ -137,7 +140,8 @@ BOOL CHMIDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	
 	// TODO: Add extra initialization here
-	SetDlgItemText(IDC_STATIC_TIP, __T("设置成功"));
+	//SetDlgItemText(IDC_STATIC_TIP, __T("设置成功"));
+	SetStatusString(__T("设置成功"));
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -218,4 +222,9 @@ void CHMIDlg::OnCancelMode()
 	
 	// TODO: Add your message handler code here
 	
+}
+
+void CHMIDlg::SetStatusString(CString strText)
+{
+	SetDlgItemText(IDC_STATIC_TIP, strText);
 }

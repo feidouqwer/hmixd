@@ -18,6 +18,7 @@
 #define IDC_COMBO_TOWER                 1004
 #define IDC_IPADDRESS2                  1005
 #define IDC_IPADDRESS_TOWER_IP          1005
+#define IDC_IPADDRESS_RUN               1005
 #define IDC_BUTTON_SET                  1006
 #define IDC_STATIC_TIP                  1007
 

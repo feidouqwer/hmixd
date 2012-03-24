@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "HMI.h"
 #include "HMIRunDlg.h"
-#include "CfgFile.h"
+#include "HMIDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -43,31 +43,45 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CHMIRunDlg message handlers
 
-void CHMIRunDlg::OnButtonRun() 
-{
-	// TODO: Add your control notification handler code here
-	m_cfgFile.SaveCfgFile();
-	m_cfgFile.LoadCfgFile();
-}
-
 BOOL CHMIRunDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	CCfgFile cfgfile;
-	cfgfile.LoadCfgFile();
-	int number = cfgfile.getNumber();
+	int number = gCfgFile.GetTowerNumber();
 	CComboBox *pCombo = (CComboBox *)GetDlgItem(IDC_COMBO_RUN);
-	pCombo->InsertString(0, "塔基");
 
+	int row;
 	CString str;
-	for(int i=0; i<number; i++)
+	for(row=0; row<number; row++)
 	{
-		str.Format("风机%d", i);
-		pCombo->InsertString(i + 1, str);
+		str.Format("风机%d", row + 1);
+		pCombo->InsertString(row, str);
 	}
+	pCombo->InsertString(row, "塔基");
 	pCombo->SetCurSel(0);
+	
+	CIPAddressCtrl *pIPAddr = (CIPAddressCtrl *)GetDlgItem(IDC_IPADDRESS_RUN);
+	pIPAddr->SetAddress(gCfgFile.GetTowerIP(0));
+
+
+	CHMIDlg *pDlg = (CHMIDlg *)GetParent();
+	pDlg->SetStatusString(__T("加载配置文件成功!"));
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
+}
+
+void CHMIRunDlg::OnButtonRun() 
+{
+	// TODO: Add your control notification handler code here
+	CIPAddressCtrl *pIpAddr = (CIPAddressCtrl *)GetDlgItem(IDC_IPADDRESS_RUN);
+	DWORD dwIpAddr;
+	pIpAddr->GetAddress(dwIpAddr);
+	if(dwIpAddr == 0)
+	{
+		AfxMessageBox(__T("请先设置IP地址!"), MB_OK | MB_ICONERROR);
+		return;
+	}
+	// add the run application code here!!!
 }

@@ -42,7 +42,7 @@ BOOL CProFile::SaveProFile(LPCSTR lpcstrPath)
 	arch.WriteString(__T("# JCIP代表基舱IP, TJIP代表塔基IP\r\n"));
 	arch.WriteString(__T("#  机航IP\r\n"));
 	strLine.Format("JCIP = %d.%d.%d.%d", 
-		(m_jcip&0xff), (m_jcip>>8)&0xff, (m_jcip>>16)&0xff, (m_jcip>>24)&0xff);
+		(m_CabinIp&0xff), (m_CabinIp>>8)&0xff, (m_CabinIp>>16)&0xff, (m_CabinIp>>24)&0xff);
 	arch.WriteString(strLine);
 	for(int i=0; i<nTjNum; i++)
 	{

@@ -3,8 +3,8 @@
 
 #include "stdafx.h"
 #include "HMI.h"
+#include "HMIDlg.h"
 #include "HMISettingDlg.h"
-#include "CfgFile.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -37,6 +37,7 @@ void CHMISettingDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CHMISettingDlg, CDialog)
 	//{{AFX_MSG_MAP(CHMISettingDlg)
 	ON_BN_CLICKED(IDC_BUTTON_SET, OnButtonSet)
+	ON_CBN_SELCHANGE(IDC_COMBO_TOWER, OnSelchangeComboTower)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -48,12 +49,9 @@ BOOL CHMISettingDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	CCfgFile cfgFile;
-
-	cfgFile.LoadCfgFile();
 
 	CString str;
-	int number = cfgFile.getNumber();
+	int number = gCfgFile.GetTowerNumber();
 	CComboBox *pComBox = (CComboBox *)GetDlgItem(IDC_COMBO_TOWER);
 	for(int i=0; i<number; i++)
 	{
@@ -63,10 +61,12 @@ BOOL CHMISettingDlg::OnInitDialog()
 	pComBox->SetCurSel(0);
 
 	CIPAddressCtrl *pCabinIpCtrl = (CIPAddressCtrl *)GetDlgItem(IDC_IPADDRESS_CABIN_IP);
-	pCabinIpCtrl->SetAddress(192, 168, 1, 2);
+	//pCabinIpCtrl->SetAddress(192, 168, 1, 2);
+	pCabinIpCtrl->SetAddress(gCfgFile.GetCabinIP());
 
 	CIPAddressCtrl *pTowerIpCtrl = (CIPAddressCtrl *)GetDlgItem(IDC_IPADDRESS_TOWER_IP);
-	pTowerIpCtrl->SetAddress(192, 168, 1, 2);
+	//pTowerIpCtrl->SetAddress(192, 168, 1, 2);
+	pTowerIpCtrl->SetAddress(gCfgFile.GetTowerIP(0));
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -74,5 +74,31 @@ BOOL CHMISettingDlg::OnInitDialog()
 void CHMISettingDlg::OnButtonSet() 
 {
 	// TODO: Add your control notification handler code here
+	DWORD dwCabinIP, dwTowerIP;
+	int nIndex;
+	CIPAddressCtrl *pIPCtrl = (CIPAddressCtrl *)GetDlgItem(IDC_IPADDRESS_CABIN_IP);
+	pIPCtrl->GetAddress(dwCabinIP);
 	
+	pIPCtrl = (CIPAddressCtrl *)GetDlgItem(IDC_IPADDRESS_TOWER_IP);
+	pIPCtrl->GetAddress(dwTowerIP);
+	
+	CComboBox *pComboTower = (CComboBox *)GetDlgItem(IDC_COMBO_TOWER);
+	nIndex = pComboTower->GetCurSel();
+
+	gCfgFile.SetCabinIP(dwCabinIP);
+	gCfgFile.SetTowerIP(nIndex, dwTowerIP);
+	
+	gCfgFile.SaveCfgFile();
+}
+
+void CHMISettingDlg::OnSelchangeComboTower() 
+{
+	// TODO: Add your control notification handler code here
+	int nIndex;
+	CComboBox *pComboTower = (CComboBox *)GetDlgItem(IDC_COMBO_TOWER);
+	nIndex = pComboTower->GetCurSel();
+
+	DWORD dwTowerIP = gCfgFile.GetTowerIP(nIndex);
+	CIPAddressCtrl *pIPCtrl = (CIPAddressCtrl *)GetDlgItem(IDC_IPADDRESS_TOWER_IP);
+	pIPCtrl->SetAddress(dwTowerIP);
 }

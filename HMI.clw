@@ -13,11 +13,11 @@ Class2=CHMIDlg
 Class3=CAboutDlg
 
 ResourceCount=5
-Resource1=IDD_HMI_DIALOG
+Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
-Resource3=IDD_ABOUTBOX
+Resource3=IDD_DIALOG_RUN
 Class4=CHMIRunDlg
-Resource4=IDD_DIALOG_RUN
+Resource4=IDD_HMI_DIALOG
 Class5=CHMISettingDlg
 Resource5=IDD_DIALOG_SETTING
 
@@ -63,10 +63,11 @@ Control3=IDC_STATIC_TIP,static,1342308352
 [DLG:IDD_DIALOG_RUN]
 Type=1
 Class=CHMIRunDlg
-ControlCount=3
+ControlCount=4
 Control1=IDC_STATIC,static,1342308352
 Control2=IDC_COMBO_RUN,combobox,1344340227
 Control3=IDC_BUTTON_RUN,button,1342242816
+Control4=IDC_IPADDRESS_RUN,SysIPAddress32,1476460544
 
 [CLS:CHMIRunDlg]
 Type=0
@@ -75,7 +76,7 @@ ImplementationFile=HMIRunDlg.cpp
 BaseClass=CDialog
 Filter=D
 VirtualFilter=dWC
-LastObject=CHMIRunDlg
+LastObject=IDC_BUTTON_RUN
 
 [DLG:IDD_DIALOG_SETTING]
 Type=1
