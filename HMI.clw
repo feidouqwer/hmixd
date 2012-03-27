@@ -76,7 +76,7 @@ ImplementationFile=HMIRunDlg.cpp
 BaseClass=CDialog
 Filter=D
 VirtualFilter=dWC
-LastObject=IDC_BUTTON_RUN
+LastObject=IDC_COMBO_RUN
 
 [DLG:IDD_DIALOG_SETTING]
 Type=1

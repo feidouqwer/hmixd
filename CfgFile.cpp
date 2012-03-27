@@ -30,7 +30,8 @@ CCfgFile::CCfgFile()
 	CString strTmp = tchar;
 	int nPos = strTmp.ReverseFind('\\');
 	if(nPos != -1)
-		m_batFileName = strTmp.Mid(nPos + 1, strTmp.GetLength() - nPos - 1);
+		m_batFileName = strTmp.Mid(nPos + 1, strTmp.GetLength() - nPos - 1) + ".bat";
+	m_proFileName = "hmi.properties";
 }
 
 CCfgFile::~CCfgFile()
@@ -101,9 +102,13 @@ bool CCfgFile::LoadCfgFile()
 			if(m_nTowerNum < 0 || m_nTowerNum > MAX_TOWER_NUM)
 				m_nTowerNum = MAX_TOWER_NUM;
 		}
-		else if(strLine.Find(__T("batFileName")) != -1)
+		else if(strLine.Find(__T("BatFileName")) != -1)
 		{
 			m_batFileName = valueStr;
+		}
+		else if(strLine.Find(__T("ProFileName")) != -1)
+		{
+			m_proFileName = valueStr;
 		}
 	}
 	return 0;
@@ -122,12 +127,18 @@ bool CCfgFile::SaveCfgFile()
 
 	try
 	{
-		CArchive arch(&file, CArchive::store);
+		CArchive arch(&file, CArchive::store);	
+		arch.WriteString(__T("# HMI配置文件, 手动修改请确保格式正确"));
+		arch.WriteString(__T("# JCIP代表基舱IP, TJIP代表塔基IP\r\n\r\n"));
 		arch.WriteString(__T("# 风机数量\r\n"));
 		strLine.Format("number = %d\r\n\r\n", m_nTowerNum);
 		arch.WriteString(strLine);
 		arch.WriteString(__T("# 批处理文件名\r\n"));
-		arch.WriteString(m_batFileName + "\r\n\r\n");
+		strLine = "BatFileName = ";
+		arch.WriteString(strLine + m_batFileName + "\r\n\r\n");
+		arch.WriteString(__T("# 属性文件名\r\n"));
+		strLine = "ProFileName = ";
+		arch.WriteString(strLine + m_proFileName + "\r\n\r\n");
 
 		if(m_CabinIp != 0)
 		{
@@ -140,7 +151,7 @@ bool CCfgFile::SaveCfgFile()
 			arch.WriteString(strLine);
 		}
 
-		arch.WriteString(__T("# 塔基IP地址\r\n\r\n"));
+		arch.WriteString(__T("# 塔基IP地址\r\n"));
 		for(int i=0; i<m_nTowerNum; i++)
 		{
 			if(m_TowerIP[i] != 0)
@@ -236,4 +247,9 @@ void CCfgFile::SetTowerIP(int nIndex, DWORD dwTowerIP)
 {
 	if(nIndex >= 0 && nIndex < MAX_TOWER_NUM)
 		m_TowerIP[nIndex] = dwTowerIP;
+}
+
+CString CCfgFile::GetProFileName()
+{
+	return m_proFileName;
 }

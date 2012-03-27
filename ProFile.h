@@ -12,15 +12,10 @@
 class CProFile  
 {
 public:
-	BOOL SaveProFile(LPCSTR lpcstrPath);
-	BOOL MakeBakFile(LPCSTR lpstrPath);
-	CProFile(int nTjNum);
+	BOOL SetNetIP(DWORD dwNetIP);
+	BOOL MakeBakFile(LPCSTR lpstrPath, LPCSTR lpstrBakPath);
+	CProFile();
 	virtual ~CProFile();
-
-private:
-	int nTjNum;
-	DWORD m_CabinIp;
-	DWORD m_tjip[1000];
 };
 
 #endif // !defined(AFX_PROFILE_H__960D11FB_156B_44CF_8C33_14073EACBBA2__INCLUDED_)

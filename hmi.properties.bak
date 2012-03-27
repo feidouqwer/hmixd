@@ -1,0 +1,190 @@
+version = 3.1
+
+# Andelst
+# NetIP = 10.14.40.55
+# Bochum
+# NetIP = 10.11.40.65
+# Lelystad
+#NetIP = 192.168.123.211
+# Webterminal
+# NetIP = switch
+# PC
+#  NetIP = PC
+NetIP = 192.0.0.0
+
+#turbine type
+#TurbineType = Z82
+#TurbineType = Z72MV
+#TurbineType = Z72LV
+#TurbineType = Z72LV_AC
+TurbineType = X82
+#TurbineType = GRDMSTR
+
+DsUpdateRate = 1000
+DsTimeout = 2000
+DsAliveCheckInterval = 2000
+GroupPollingRate = 1000
+GroupUpdateRate = 500
+
+LogOnCode = 0000
+
+ExitButton = 1
+#ExitButton = 0
+
+# Flags for mode
+IgnoreOffLine = 1
+#IgnoreOffLine = 0
+#UseBeacon = 1
+UseBeacon = 0
+UseReconfiguration = 1
+#UseReconfiguration = 0
+#UseSrvBr = 1
+UseSrvBr = 0
+UseTCF = 1
+#UseTCF = 0
+UseMBGPPiston = 1
+#UseMBGPPiston = 0
+#UseGridLog = 1
+UseGridLog = 0
+
+ExtendedMode = 1
+#ExtendedMode = 0
+
+Language = en
+
+#folders for PC
+FileLocation = ./
+LogoPicture = pics/logo.gif
+ConvTempPicture = pics/Converter_Temperatures.gif
+Transformator = pics/Transformator.gif
+Conv_cool = pics/conv_cool.gif
+
+#folders for WT305
+#FileLocation = /cfc0/PICS
+#LogoPicture =/logo.gif
+#ConvTempPicture = /Converter_Temperatures.gif
+#Transformator = /Transformator.gif
+#Conv_cool = /conv_cool.gif
+
+TopSouth = 0
+DegreesSouth = 0
+DirectionDegrees = 0
+TemperatureScale = C
+
+# Supported colors: gray, green, orange, red, yellow
+MainStates = 9
+MainStateColor0 = gray
+MainStateColor1 = red
+MainStateColor2 = green
+MainStateColor3 = green
+MainStateColor4 = green
+MainStateColor5 = green
+MainStateColor6 = green
+MainStateColor7 = red
+MainStateColor8 = green
+MainStateColor9 = green
+
+BreakerStates = 2
+BreakerStateColor0 = gray
+BreakerStateColor1 = red
+BreakerStateColor2 = green
+
+NacelleStates = 6
+NacelleStateColor0 = gray
+NacelleStateColor1 = red
+NacelleStateColor2 = green
+NacelleStateColor3 = green
+NacelleStateColor4 = green
+NacelleStateColor5 = green
+NacelleStateColor6 = yellow
+
+BrakeStates = 3
+BrakeStateColor0 = gray
+BrakeStateColor1 = yellow
+BrakeStateColor2 = green
+BrakeStateColor3 = green
+
+RotorStates = 11
+RotorStateColor0 = gray
+RotorStateColor1 = red
+RotorStateColor2 = green
+RotorStateColor3 = green
+RotorStateColor4 = green
+RotorStateColor5 = green
+RotorStateColor6 = green
+RotorStateColor7 = yellow
+RotorStateColor8 = yellow
+RotorStateColor9 = yellow
+RotorStateColor10 = yellow
+RotorStateColor11 = yellow
+
+ConverterStates = 6
+ConverterStateColor0 = gray
+ConverterStateColor1 = green
+ConverterStateColor2 = yellow
+ConverterStateColor3 = green
+ConverterStateColor4 = green
+ConverterStateColor5 = green
+ConverterStateColor6 = yellow
+
+Rdy2StartStates = 3
+Rdy2StartStateColor0 = gray
+Rdy2StartStateColor1 = orange
+Rdy2StartStateColor2 = green
+Rdy2StartStateColor3 = gray
+
+BatteryStates = 3
+BatteryStateColor0 = gray
+BatteryStateColor1 = red
+BatteryStateColor2 = orange
+BatteryStateColor3 = green
+
+OverSpdTestStates = 3
+OverSpdTestStateColor0 = gray
+OverSpdTestStateColor1 = yellow
+OverSpdTestStateColor2 = red
+OverSpdTestStateColor3 = green
+
+EmergTestStates = 3
+EmergTestStateColor0 = gray
+EmergTestStateColor1 = yellow
+EmergTestStateColor2 = red
+EmergTestStateColor3 = green
+
+YawFltStates = 2
+YawFltStateColor0 = gray
+YawFltStateColor1 = green
+YawFltStateColor2 = red
+
+ManPitchStates = 3
+ManPitchStateColor0 = gray
+ManPitchStateColor1 = red
+ManPitchStateColor2 = green
+ManPitchStateColor3 = yellow
+
+PitchDriveStates = 2
+PitchDriveStateColor0 = gray
+PitchDriveStateColor1 = green
+PitchDriveStateColor2 = red
+
+SBPStates = 5
+SBPStateColor0 = gray 
+SBPStateColor1 = yellow
+SBPStateColor2 = red
+SBPStateColor3 = orange
+SBPStateColor4 = green
+SBPStateColor5 = yellow
+
+SBPErrorStates = 8
+SBPErrorStateColor0 = gray
+SBPErrorStateColor1 = red
+SBPErrorStateColor2 = red
+SBPErrorStateColor3 = red
+SBPErrorStateColor4 = red
+SBPErrorStateColor5 = red
+SBPErrorStateColor6 = red
+SBPErrorStateColor7 = red
+SBPErrorStateColor8 = green
+en
+
+en

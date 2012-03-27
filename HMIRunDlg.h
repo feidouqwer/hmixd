@@ -38,6 +38,7 @@ protected:
 	//{{AFX_MSG(CHMIRunDlg)
 	afx_msg void OnButtonRun();
 	virtual BOOL OnInitDialog();
+	afx_msg void OnSelchangeComboRun();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

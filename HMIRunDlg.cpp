@@ -5,6 +5,7 @@
 #include "HMI.h"
 #include "HMIRunDlg.h"
 #include "HMIDlg.h"
+#include "ProFile.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -37,6 +38,7 @@ void CHMIRunDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CHMIRunDlg, CDialog)
 	//{{AFX_MSG_MAP(CHMIRunDlg)
 	ON_BN_CLICKED(IDC_BUTTON_RUN, OnButtonRun)
+	ON_CBN_SELCHANGE(IDC_COMBO_RUN, OnSelchangeComboRun)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -83,5 +85,71 @@ void CHMIRunDlg::OnButtonRun()
 		AfxMessageBox(__T("请先设置IP地址!"), MB_OK | MB_ICONERROR);
 		return;
 	}
-	// add the run application code here!!!
+
+	CProFile proFile;
+	proFile.SetNetIP(dwIpAddr);
+	CString batFileName = gCfgFile.GetBatFileName();
+	if(batFileName.IsEmpty())
+	{
+		AfxMessageBox(__T("请先设备批处理程序名再点击运行!"), MB_OK | MB_ICONERROR);
+		return;
+	}
+	batFileName.MakeLower();
+	
+	CFile batFile;
+	if(!batFile.Open(batFileName, CFile::modeRead))
+	{
+		AfxMessageBox(__T("打开执行文件失败!"), MB_OK | MB_ICONERROR);
+		return;
+	}
+
+	CString strLine;
+	CString subStr;
+	CArchive arch(&batFile, CArchive::load);
+	if(!arch.ReadString(strLine))
+	{
+		AfxMessageBox(__T("读取执行文件失败!"), MB_OK | MB_ICONERROR);
+		return;
+	}
+	try
+	{
+		subStr = strLine.SpanIncluding(" ;");
+		subStr = strLine.SpanIncluding(" ;");
+	}
+	catch (CMemoryException* e)
+	{
+		AfxMessageBox(__T("分解执行文件失败!"), MB_OK | MB_ICONERROR);
+		return;
+	}
+
+	HINSTANCE Instance = ShellExecute(NULL,"open", batFileName, NULL,NULL,SW_SHOWNORMAL);
+	if((int)Instance <= 32)
+	{
+		AfxMessageBox(__T("打开程序失败!"), MB_OK | MB_ICONERROR);
+		return;
+	}
+}
+
+void CHMIRunDlg::OnSelchangeComboRun() 
+{
+	// TODO: Add your control notification handler code here
+	int nCurSel;
+	int nTowerNum;
+	DWORD dwIP;
+
+	CComboBox *pCombo = (CComboBox *)GetDlgItem(IDC_COMBO_RUN);
+	nCurSel = pCombo->GetCurSel();
+	
+	nTowerNum = gCfgFile.GetTowerNumber();
+	if(nCurSel < nTowerNum)
+	{
+		dwIP = gCfgFile.GetTowerIP(nCurSel);
+	}
+	else if(nCurSel == nTowerNum)
+	{
+		dwIP = gCfgFile.GetCabinIP();
+	}
+
+	CIPAddressCtrl *pIPCtrl = (CIPAddressCtrl *)GetDlgItem(IDC_IPADDRESS_RUN);
+	pIPCtrl->SetAddress(dwIP);
 }

@@ -1,13 +1,17 @@
+# HMI配置文件, 手动修改请确保格式正确# JCIP代表基舱IP, TJIP代表塔基IP
+
 # 风机数量
 number = 24
 
 # 批处理文件名
-hmixd
+BatFileName = hmixd.bat
+
+# 属性文件名
+ProFileName = hmi.properties
 
 # 机航IP地址
 JCIP = 192.168.0.0
 
 # 塔基IP地址
-
 TJIP1 = 192.0.0.0
 TJIP2 = 192.168.168.168

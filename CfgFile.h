@@ -14,6 +14,7 @@
 class CCfgFile  
 {
 public:
+	CString GetProFileName();
 	void SetTowerIP(int nIndex, DWORD dwTowerIP);
 	void SetCabinIP(DWORD dwCabinIP);
 	DWORD GetTowerIP(int nIndex);
@@ -31,6 +32,7 @@ private:
 	DWORD m_CabinIp;
 	DWORD m_TowerIP[MAX_TOWER_NUM];
 	CString m_batFileName;
+	CString m_proFileName;
 };
 
 #endif // !defined(AFX_CFGFILE_H__3D013421_0823_47BF_9215_9F4ACBBB3AE2__INCLUDED_)
