@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CHMIRunDlg
+LastClass=CHMIDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "HMI.h"
@@ -34,7 +34,7 @@ ImplementationFile=HMIDlg.cpp
 Filter=D
 BaseClass=CDialog
 VirtualFilter=dWC
-LastObject=CHMIDlg
+LastObject=IDC_STATIC_TIP
 
 [CLS:CAboutDlg]
 Type=0
@@ -64,9 +64,9 @@ Control3=IDC_STATIC_TIP,static,1342308352
 Type=1
 Class=CHMIRunDlg
 ControlCount=4
-Control1=IDC_STATIC,static,1342308352
-Control2=IDC_COMBO_RUN,combobox,1344340227
-Control3=IDC_BUTTON_RUN,button,1342242816
+Control1=IDC_COMBO_RUN,combobox,1344340227
+Control2=IDC_BUTTON_RUN,button,1342242816
+Control3=IDC_STATIC,static,1342308352
 Control4=IDC_IPADDRESS_RUN,SysIPAddress32,1476460544
 
 [CLS:CHMIRunDlg]
@@ -76,7 +76,7 @@ ImplementationFile=HMIRunDlg.cpp
 BaseClass=CDialog
 Filter=D
 VirtualFilter=dWC
-LastObject=IDC_COMBO_RUN
+LastObject=IDC_BUTTON_RUN
 
 [DLG:IDD_DIALOG_SETTING]
 Type=1

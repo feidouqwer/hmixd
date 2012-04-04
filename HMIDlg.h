@@ -19,7 +19,7 @@ class CHMIDlg : public CDialog
 {
 // Construction
 public:
-	void SetStatusString(CString strText);
+	void SetTipString(CString strText);
 	CHMIDlg(CWnd* pParent = NULL);	// standard constructor
 
 // Dialog Data

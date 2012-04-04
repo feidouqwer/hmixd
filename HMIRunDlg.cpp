@@ -39,6 +39,7 @@ BEGIN_MESSAGE_MAP(CHMIRunDlg, CDialog)
 	//{{AFX_MSG_MAP(CHMIRunDlg)
 	ON_BN_CLICKED(IDC_BUTTON_RUN, OnButtonRun)
 	ON_CBN_SELCHANGE(IDC_COMBO_RUN, OnSelchangeComboRun)
+	ON_WM_SETCURSOR()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -60,15 +61,14 @@ BOOL CHMIRunDlg::OnInitDialog()
 		str.Format("风机%d", row + 1);
 		pCombo->InsertString(row, str);
 	}
-	pCombo->InsertString(row, "塔基");
+	pCombo->InsertString(row, "机舱");
 	pCombo->SetCurSel(0);
 	
 	CIPAddressCtrl *pIPAddr = (CIPAddressCtrl *)GetDlgItem(IDC_IPADDRESS_RUN);
 	pIPAddr->SetAddress(gCfgFile.GetTowerIP(0));
 
-
-	CHMIDlg *pDlg = (CHMIDlg *)GetParent();
-	pDlg->SetStatusString(__T("加载配置文件成功!"));
+	CHMIDlg *pDlg = (CHMIDlg *)(GetParent()->GetParent());
+	pDlg->SetTipString(__T("加载配置文件成功!"));
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -103,31 +103,21 @@ void CHMIRunDlg::OnButtonRun()
 		return;
 	}
 
-	CString strLine;
-	CString subStr;
-	CArchive arch(&batFile, CArchive::load);
-	if(!arch.ReadString(strLine))
-	{
-		AfxMessageBox(__T("读取执行文件失败!"), MB_OK | MB_ICONERROR);
-		return;
-	}
-	try
-	{
-		subStr = strLine.SpanIncluding(" ;");
-		subStr = strLine.SpanIncluding(" ;");
-	}
-	catch (CMemoryException* e)
-	{
-		AfxMessageBox(__T("分解执行文件失败!"), MB_OK | MB_ICONERROR);
-		return;
-	}
-
-	HINSTANCE Instance = ShellExecute(NULL,"open", batFileName, NULL,NULL,SW_SHOWNORMAL);
+	TCHAR curDir[512];
+	CString appPath;
+	GetCurrentDirectory(sizeof(curDir), curDir);
+	appPath = "cmd.exe /c ";
+	appPath = appPath + curDir;
+	appPath = appPath + "\\" + batFileName;
+//	AfxMessageBox(appPath, MB_OK);
+	HINSTANCE Instance = ShellExecute(NULL,"open", "cmd.exe", appPath, NULL, SW_SHOWNORMAL);
 	if((int)Instance <= 32)
 	{
 		AfxMessageBox(__T("打开程序失败!"), MB_OK | MB_ICONERROR);
 		return;
 	}
+	CHMIDlg *pDlg = (CHMIDlg *)(GetParent()->GetParent());
+	pDlg->SetTipString(batFileName + __T("开始运行"));
 }
 
 void CHMIRunDlg::OnSelchangeComboRun() 
@@ -152,4 +142,11 @@ void CHMIRunDlg::OnSelchangeComboRun()
 
 	CIPAddressCtrl *pIPCtrl = (CIPAddressCtrl *)GetDlgItem(IDC_IPADDRESS_RUN);
 	pIPCtrl->SetAddress(dwIP);
+}
+
+BOOL CHMIRunDlg::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message) 
+{
+	// TODO: Add your message handler code here and/or call default
+	OnSelchangeComboRun();
+	return CDialog::OnSetCursor(pWnd, nHitTest, message);
 }

@@ -43,7 +43,7 @@ bool CCfgFile::LoadCfgFile()
 {
 	CFile cfgFile;
 	
-	if(!cfgFile.Open(__T("HMICfg.txt"), CFile::modeRead))
+	if(!cfgFile.Open(__T("HMICfg.cfg"), CFile::modeRead))
 	{
 		AfxMessageBox(__T("打开配置属性文件失败"), MB_OK | MB_ICONERROR);
 		return SaveDefaultCfgFile();
@@ -83,7 +83,7 @@ bool CCfgFile::LoadCfgFile()
 			}
 			if(m_nTowerNum > 0 && m_nTowerNum < 1000)
 			{
-				m_TowerIP[m_nTowerNum - 1] = (ipAddr[0] << 24) | (ipAddr[1] << 16) | (ipAddr[1] << 8) | (ipAddr[1] << 0);
+				m_TowerIP[m_nTowerNum - 1] = (ipAddr[0] << 24) | (ipAddr[1] << 16) | (ipAddr[2] << 8) | (ipAddr[3] << 0);
 			}
 			TRACE("TJNUM: %d\r\n", m_nTowerNum);
 			TRACE("IP: %d.%d.%d.%d\r\n", ipAddr[0], ipAddr[1], ipAddr[2], ipAddr[3]);
@@ -119,7 +119,7 @@ bool CCfgFile::SaveCfgFile()
 	CFile file;
 	CString strLine;
 
-	if(!file.Open("HMICfg.txt", CFile::modeWrite | CFile::modeCreate))
+	if(!file.Open("HMICfg.cfg", CFile::modeWrite | CFile::modeCreate))
 	{
 		AfxMessageBox(__T("打开HMI配置文件失败"));
 		return false;
@@ -177,10 +177,10 @@ bool CCfgFile::SaveCfgFile()
 bool CCfgFile::SaveDefaultCfgFile()
 {
 	CFile cfgFile;
-	CString strLine;
+	CString strLine, strTmp;
 	TCHAR tchar[256];
 
-	if(!cfgFile.Open("HMICfg.txt", CFile::modeWrite | CFile::modeCreate))
+	if(!cfgFile.Open("HMICfg.cfg", CFile::modeWrite | CFile::modeCreate))
 	{
 		AfxMessageBox(__T("打开HMI配置文件失败"));
 		return false;
@@ -192,19 +192,36 @@ bool CCfgFile::SaveDefaultCfgFile()
 
 		arch.WriteString(__T("# 风机数量\r\n"));
 		m_nTowerNum = DEFAULT_NUMBER;
-		strLine.Format("number = %d\r\n", m_nTowerNum);
+		strLine.Format("number = %d\r\n\r\n", m_nTowerNum);
 		arch.WriteString(strLine);
 
 		arch.WriteString(__T("# 批处理文件名\r\n"));
 		GetCurrentDirectory(sizeof(tchar), tchar);
 		TRACE("CurrentDirectoroy: %s\r\n", tchar);
-		m_batFileName = tchar;
-		strLine = "batFileName" + m_batFileName;
+		strTmp = tchar;
+		int nPos = strTmp.ReverseFind('\\');
+		if(nPos != -1)
+			m_batFileName = strTmp.Mid(nPos + 1, strTmp.GetLength() - nPos - 1) + ".bat";
+		else
+			m_batFileName = "";
+		m_batFileName.MakeLower();
+		strLine = "BatFileName = " + m_batFileName + "\r\n\r\n";
 		arch.WriteString(strLine);
+		
+		arch.WriteString(__T("# 属性文件名\r\n"));
+		m_proFileName = "hmi.properties";
+		arch.WriteString("ProFileName = hmi.properties\r\n\r\n");
+		
+		arch.WriteString(__T("# 机航IP地址\r\n"));
+		m_CabinIp = 1 + (1 << 8) + (168 << 16) + (192 << 24);
+		arch.WriteString(__T("JCIP = 192.168.1.1\r\n\r\n"));
 
-		for(int i=0; i<MAX_TOWER_NUM; i++)
+		arch.WriteString(__T("# 塔基IP地址\r\n"));
+		for(int i=0; i<m_nTowerNum; i++)
 		{
-			m_TowerIP[i] = 192 + (168 << 8) + (1 << 16) + (i << 24);
+			m_TowerIP[i] = i + 1 + (1 << 8) + (168 << 16) + (192 << 24);
+			strLine.Format("TJIP%d = 192.168.1.%d\r\n", i + 1, i + 1);
+			arch.WriteString(strLine);
 		}
 	}
 	catch (...)

@@ -39,6 +39,7 @@ protected:
 	afx_msg void OnButtonRun();
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSelchangeComboRun();
+	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

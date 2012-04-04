@@ -141,7 +141,7 @@ BOOL CHMIDlg::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 	//SetDlgItemText(IDC_STATIC_TIP, __T("设置成功"));
-	SetStatusString(__T("设置成功"));
+	//SetTipString(__T("设置成功"));
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -224,7 +224,8 @@ void CHMIDlg::OnCancelMode()
 	
 }
 
-void CHMIDlg::SetStatusString(CString strText)
+void CHMIDlg::SetTipString(CString strText)
 {
 	SetDlgItemText(IDC_STATIC_TIP, strText);
+	UpdateWindow();
 }
