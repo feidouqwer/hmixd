@@ -13,11 +13,11 @@ Class2=CHMIDlg
 Class3=CAboutDlg
 
 ResourceCount=5
-Resource1=IDD_ABOUTBOX
+Resource1=IDD_DIALOG_RUN
 Resource2=IDR_MAINFRAME
-Resource3=IDD_DIALOG_RUN
+Resource3=IDD_HMI_DIALOG
 Class4=CHMIRunDlg
-Resource4=IDD_HMI_DIALOG
+Resource4=IDD_ABOUTBOX
 Class5=CHMISettingDlg
 Resource5=IDD_DIALOG_SETTING
 
@@ -66,8 +66,8 @@ Class=CHMIRunDlg
 ControlCount=4
 Control1=IDC_COMBO_RUN,combobox,1344340227
 Control2=IDC_BUTTON_RUN,button,1342242816
-Control3=IDC_STATIC,static,1342308352
-Control4=IDC_IPADDRESS_RUN,SysIPAddress32,1476460544
+Control3=IDC_IPADDRESS_RUN,SysIPAddress32,1476395008
+Control4=IDC_STATIC,static,1342308352
 
 [CLS:CHMIRunDlg]
 Type=0

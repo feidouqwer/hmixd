@@ -66,7 +66,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON    DISCARDABLE     "res\\HMI.ico"
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\32.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -106,9 +106,9 @@ BEGIN
     COMBOBOX        IDC_COMBO_RUN,47,25,100,86,CBS_DROPDOWNLIST | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
     PUSHBUTTON      "启动",IDC_BUTTON_RUN,68,63,50,24
-    LTEXT           "设备:",IDC_STATIC,18,28,20,8
     CONTROL         "IPAddress2",IDC_IPADDRESS_RUN,"SysIPAddress32",
-                    WS_DISABLED | WS_TABSTOP,47,44,100,15
+                    WS_DISABLED,47,44,100,15
+    LTEXT           "设备:",IDC_STATIC,18,28,20,8
 END
 
 IDD_DIALOG_SETTING DIALOG DISCARDABLE  0, 0, 187, 134
